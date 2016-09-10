@@ -20,10 +20,11 @@ REDIS_PORT = 16379
 SCHEDULER = "sina.scrapy_redis.scheduler.Scheduler"
 SCHEDULER_PERSIST = False
 SCHEDULER_QUEUE_CLASS = 'sina.scrapy_redis.queue.SpiderPriorityQueue'
+DUPEFILTER_KEY='sina.scrapy_redis.dupefilter.RFPDupeFilter'
 
 #set mongodb to store items
 MONGO_URI = "docker-ubuntu"
-MONGO_PORT = 27017
+MONGO_PORT = 40000 
 MONGO_DATABASE = "news_sina"
 MONGO_COLLECTION = "news_items"
 
@@ -33,6 +34,7 @@ LOG_LEVEL='INFO'
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'sina.pipelines.DuplicatesPipeline': 100,
     'sina.pipelines.MongoPipeline': 300,
 }
 

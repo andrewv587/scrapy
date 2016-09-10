@@ -8,12 +8,19 @@ class NewsSinaSpider(scrapy.Spider):
    # allowed_domains = ["new.sina.com.cn"]
    #start url
     start_urls = (
-            'http://news.sina.com.cn/c/nd/2016-09-05/doc-ifxvpxua7896905.shtml?cre=newspagepc&mod=f&loc=1&r=1&doct=0&rfunc=100',
+      'http://news.sina.com.cn/c/nd/2016-09-05/doc-ifxvpxua7896905.shtml?cre=newspagepc&mod=f&loc=1&r=1&doct=0&rfunc=100',
+      'http://news.sina.com.cn/c/nd/2016-09-07/doc-ifxvukhx4521882.shtml',
+      'http://news.sina.com.cn/w/zx/2016-09-07/doc-ifxvukhx4512372.shtml',
+      'http://news.sina.com.cn/w/zx/2016-09-07/doc-ifxvukhx4510865.shtml',
+      'http://news.sina.com.cn/o/2016-09-07/doc-ifxvpxua8099408.shtml',
+      'http://news.sina.com.cn/o/2016-09-07/doc-ifxvueif6177455.shtml',
+      'http://news.sina.com.cn/o/2016-09-03/doc-ifxvpxua7780150.shtml?cre=newspagepc&mod=f&loc=15&r=9&doct=0&rfunc=40',
     )
 
     def parse(self, response):
         sinaItem=SinaItem()
         links=[]
+        sinaItem['url']=response.url
         try:
             sinaItem['docid']=response.xpath('//div/h1[@id="artibodyTitle"]/@docid').extract()[0]
             sinaItem['title']=response.xpath('//div/h1[@id="artibodyTitle"]/text()').extract()[0]
@@ -30,7 +37,8 @@ class NewsSinaSpider(scrapy.Spider):
             sinaItem['links']=links
            #just for test
             print sinaItem['title']
-#            print sinaItem['links']
+            print sinaItem['url']
+           # print sinaItem['links']
            # print sinaItem['docid']
            # print sinaItem['author']
            # print sinaItem['timestamp']

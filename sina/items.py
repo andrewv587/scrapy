@@ -15,4 +15,5 @@ class SinaItem(scrapy.Item):
     source = scrapy.Field()
     key_words = scrapy.Field()
     text = scrapy.Field()
+    url = scrapy.Field()
     links = scrapy.Field()
